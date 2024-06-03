@@ -3,6 +3,10 @@ package pjatk.edu.kacper.finalproject.bookorder.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import pjatk.edu.kacper.finalproject.bookorder.entity.User;
 //Książka powinna zawierać:
 //Autora, Gatunek, Cenę, Ilość stron, licznik odwiedzin, oraz informację czy jest dostępna (ile sztuk).
 //Autor powinien być osobną klasą, encją bazodanową.
@@ -17,6 +21,7 @@ public class Book {
     private Long id;
 
     private String genere;
+    private String title;
     private double price;
     private int pages;
     private int entries;
@@ -25,5 +30,8 @@ public class Book {
     @ManyToOne // To mowi java persistance api że tutaj mam połączenie i połączenie ze sobą tabel
     @JoinColumn(name = "author_id", nullable = false)//
     private Author author;
+
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
+    private Set<User> userBooks = new HashSet<>();
 
 }
