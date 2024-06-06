@@ -1,12 +1,12 @@
-package pjatk.edu.kacper.finalproject.bookorder.services;
+package pjatk.edu.kacper.finalproject.bookshop.services;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pjatk.edu.kacper.finalproject.bookorder.entity.Book;
-import pjatk.edu.kacper.finalproject.bookorder.entity.User;
-import pjatk.edu.kacper.finalproject.bookorder.repository.BookRepository;
-import pjatk.edu.kacper.finalproject.bookorder.repository.UserRepository;
+import pjatk.edu.kacper.finalproject.bookshop.entity.Book;
+import pjatk.edu.kacper.finalproject.bookshop.entity.User;
+import pjatk.edu.kacper.finalproject.bookshop.repository.BookRepository;
+import pjatk.edu.kacper.finalproject.bookshop.repository.UserRepository;
 
 import java.util.List;
 

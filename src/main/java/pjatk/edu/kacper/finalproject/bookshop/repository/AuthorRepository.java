@@ -1,8 +1,8 @@
-package pjatk.edu.kacper.finalproject.bookorder.repository;
+package pjatk.edu.kacper.finalproject.bookshop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pjatk.edu.kacper.finalproject.bookorder.entity.Author;
+import pjatk.edu.kacper.finalproject.bookshop.entity.Author;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author,Long> {

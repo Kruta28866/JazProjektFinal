@@ -1,17 +1,17 @@
-package pjatk.edu.kacper.finalproject.bookorder.entity;
+package pjatk.edu.kacper.finalproject.bookshop.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import pjatk.edu.kacper.finalproject.bookorder.entity.User;
 //Książka powinna zawierać:
 //Autora, Gatunek, Cenę, Ilość stron, licznik odwiedzin, oraz informację czy jest dostępna (ile sztuk).
 //Autor powinien być osobną klasą, encją bazodanową.
 //Książka, po jej wyszukaniu powinna inkrementować ilość odwiedzin.
 
+@Builder
 @Entity // Mówimy jpa że jest to odwzorowanie bazodanowe jakies tabelki, dzięki adnotacjom stworzyła się baza danych
 @Data  // gettery settery args construktory.
 @Table(name = "books") // Wskazujemy na nazwę tabeli w serverze bazodanowym
@@ -19,7 +19,6 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Bedzie generowac mi id.
     private Long id;
-
     private String genere;
     private String title;
     private double price;

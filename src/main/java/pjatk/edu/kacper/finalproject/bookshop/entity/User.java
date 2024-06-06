@@ -1,8 +1,8 @@
-package pjatk.edu.kacper.finalproject.bookorder.entity;
+package pjatk.edu.kacper.finalproject.bookshop.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import pjatk.edu.kacper.finalproject.bookorder.types.Roles;
+import pjatk.edu.kacper.finalproject.bookshop.types.Roles;
 
 import java.util.HashSet;
 import java.util.Set;

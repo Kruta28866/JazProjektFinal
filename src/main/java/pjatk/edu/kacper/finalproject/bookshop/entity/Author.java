@@ -1,4 +1,4 @@
-package pjatk.edu.kacper.finalproject.bookorder.entity;
+package pjatk.edu.kacper.finalproject.bookshop.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
