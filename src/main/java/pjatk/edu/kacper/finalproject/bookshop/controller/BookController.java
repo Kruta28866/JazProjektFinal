@@ -30,6 +30,12 @@ public class BookController {
     @GetMapping("{bookId}")
     public ResponseEntity<GetBookResponse> getBook(@PathVariable("bookId") Long bookId) {
 
+        //TODO za każde wywołanie tego geta ma być zindeksowanie + 1. zaktualizować entry
+        //TODO Helper(@Component) Zrobic metoda bookcheck która będzie przyjmowała książke z serwisu
+        //TODO Będzie robiła modulo 10 Jeśli zwróci zero (increment o 1 przed wywowałniem modulo)
+        //TODO będzie zawołanie do klienta w feing o zamówienie tej dodatkowej książki
+        //Todo zrobie endpoint do bazy danych o zamówienie
+
         var book = bookService.getBookById(bookId);
 
         return book.map(value -> ResponseEntity.ok(GetBookResponse.builder()
@@ -63,4 +69,6 @@ public class BookController {
 
         return ResponseEntity.noContent().build();
     }
+
+    //TODO - każde wyswietlenie ma się indeksować
 }

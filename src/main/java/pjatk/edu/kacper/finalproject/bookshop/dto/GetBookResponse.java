@@ -3,7 +3,6 @@ package pjatk.edu.kacper.finalproject.bookshop.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import pjatk.edu.kacper.finalproject.bookshop.entity.Author;
 
 @Getter
 @Setter
