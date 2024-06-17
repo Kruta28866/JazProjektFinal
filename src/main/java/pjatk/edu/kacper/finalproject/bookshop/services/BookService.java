@@ -25,6 +25,8 @@ public class BookService {
         this.authorRepository = authorRepository;
     }
 
+
+
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
@@ -43,15 +45,19 @@ public class BookService {
     }
 
     public List<Book> getBookByAuthor(Author author) {
-        var foundAuthor = authorRepository.findById(author.getId());
-        if (foundAuthor.isPresent()) {
-            var books = bookRepository.findAll();
-            return books.stream()
-                    .filter(book -> book.getAuthor().equals(author))
-                    .toList();
+        if (author.getId()!= null) {
+            var foundAuthor = authorRepository.findById(author.getId());
+            if (foundAuthor.isPresent()) {
+                var books = bookRepository.findAll();
+                return books.stream()
+                        .filter(book -> book.getAuthor().equals(author))
+                        .toList();
+            }
         }
-        return new ArrayList<>();
-    }
+            return new ArrayList<>();
+
+        }
+
 
     @Transactional //Zabezpieczenie do bazy danych po nieudanej próbie stworzenia zrobi się rollback.
     public void saveBook(Book book,Long authorId) {

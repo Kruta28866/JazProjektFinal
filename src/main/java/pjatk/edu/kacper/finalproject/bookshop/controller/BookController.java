@@ -8,35 +8,37 @@ import org.springframework.web.bind.annotation.*;
 import pjatk.edu.kacper.finalproject.bookshop.dto.GetBookResponse;
 import pjatk.edu.kacper.finalproject.bookshop.dto.PostBookRequest;
 import pjatk.edu.kacper.finalproject.bookshop.entity.Book;
+import pjatk.edu.kacper.finalproject.bookshop.helper.BookHelper;
 import pjatk.edu.kacper.finalproject.bookshop.services.AuthorService;
 import pjatk.edu.kacper.finalproject.bookshop.services.BookService;
+import pjatk.edu.kacper.finalproject.bookshop.services.ReportService;
 
 @RestController
 @RequestMapping("/api/book")
 public class BookController {
-
+    private final BookHelper bookHelper;
 
     private final BookService bookService;
 
     private final AuthorService authorService;
 
+    private final ReportService reportService;
+
 
     @Autowired
-    public BookController(BookService bookService, AuthorService authorService) {
+    public BookController(BookHelper bookHelper, BookService bookService, AuthorService authorService, ReportService reportService) {
+        this.bookHelper = bookHelper;
         this.bookService = bookService;
         this.authorService = authorService;
+        this.reportService = reportService;
     }
 
     @GetMapping("{bookId}")
     public ResponseEntity<GetBookResponse> getBook(@PathVariable("bookId") Long bookId) {
 
-        //TODO za każde wywołanie tego geta ma być zindeksowanie + 1. zaktualizować entry
-        //TODO Helper(@Component) Zrobic metoda bookcheck która będzie przyjmowała książke z serwisu
-        //TODO Będzie robiła modulo 10 Jeśli zwróci zero (increment o 1 przed wywowałniem modulo)
-        //TODO będzie zawołanie do klienta w feing o zamówienie tej dodatkowej książki
-        //Todo zrobie endpoint do bazy danych o zamówienie
-
         var book = bookService.getBookById(bookId);
+
+        book.ifPresent(bookHelper::incrementEntry);
 
         return book.map(value -> ResponseEntity.ok(GetBookResponse.builder()
                         .title(value.getTitle())
@@ -67,6 +69,12 @@ public class BookController {
                 .build();
         bookService.saveBook(book, bookRequest.getAuthorId());
 
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/order-report")
+    public ResponseEntity<Void> reportOrder() {
+        reportService.sendReport();
         return ResponseEntity.noContent().build();
     }
 
