@@ -12,7 +12,7 @@ public interface BookOrderClient {
 
 
     @PostMapping("/api/order/report")
-    public void sendOrderReport(@RequestBody List<PostOrderReportRequest> request);
+    void sendOrderReport(@RequestBody List<PostOrderReportRequest> request);
 
 
 }

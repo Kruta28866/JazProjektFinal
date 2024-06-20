@@ -1,8 +1,8 @@
 package pjatk.edu.kacper.finalproject.bookshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +15,10 @@ import java.util.Set;
 @Entity // Mówimy jpa że jest to odwzorowanie bazodanowe jakies tabelki, dzięki adnotacjom stworzyła się baza danych
 @Data  // gettery settery args construktory.
 @Table(name = "books") // Wskazujemy na nazwę tabeli w serverze bazodanowym
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString(exclude = {"author", "userBooks"})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Bedzie generowac mi id.
@@ -26,7 +30,8 @@ public class Book {
     private int entries;
     private int quantity;
 
-    @ManyToOne // To mowi java persistance api że tutaj mam połączenie i połączenie ze sobą tabel
+    @JsonBackReference
+    @ManyToOne() // To mowi java persistance api że tutaj mam połączenie i połączenie ze sobą tabel
     @JoinColumn(name = "author_id", nullable = false)//
     private Author author;
 

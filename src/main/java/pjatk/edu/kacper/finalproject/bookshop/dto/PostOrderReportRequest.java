@@ -9,6 +9,6 @@ import lombok.Setter;
 @Builder
 public class PostOrderReportRequest {
     private long bookId;
-    private int quantity;
+    private int entries;
     private String title;
 }

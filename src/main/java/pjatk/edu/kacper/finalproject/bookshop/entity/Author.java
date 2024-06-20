@@ -1,13 +1,19 @@
 package pjatk.edu.kacper.finalproject.bookshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Data
+@Builder
 @Table(name = "authors")
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString(exclude = "books")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Bedzie generowac mi id.
@@ -16,6 +22,7 @@ public class Author {
 
     // Mapuje przez authora i kaskada mówi że jeżeli usunę auhtora i jeżeli zostanie usunięty author
     // zostaną usunięte książki powiązane z tym authorem(Cascade).
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Book> books;
 }

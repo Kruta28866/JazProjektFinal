@@ -21,17 +21,18 @@ public class ReportService {
     }
 
     public void sendReport() {
-        var books = bookRepository.findAll();
 
-        var report = books.stream()
+
+        var report = bookRepository.findAllBooks().stream()
                 .map(book -> PostOrderReportRequest.builder()
                         .bookId(book.getId())
                         .title(book.getTitle())
-                        .quantity(book.getEntries() / 10)
+                        .entries(book.getEntries() / 10)
                         .build())
                 .toList();
 
         bookOrderClient.sendOrderReport(report);
     }
+
 }
 
